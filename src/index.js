@@ -1,6 +1,6 @@
 class AppCache {
 
-  constructor(cache, network, fallback, settings, hash, comment) {
+  constructor(cache, network, fallback, settings, hash, comment, extraFields = []) {
     this.cache = cache;
     this.network = network;
     this.fallback = fallback;
@@ -8,6 +8,7 @@ class AppCache {
     this.hash = hash;
     this.comment = comment;
     this.assets = [];
+    this.extraFields = extraFields;
   }
 
   addAsset(asset) {
@@ -25,6 +26,7 @@ class AppCache {
       this.network && this.network.length ? `NETWORK:\n${this.network.join('\n')}\n` : null,
       this.fallback && this.fallback.length ? `FALLBACK:\n${this.fallback.join('\n')}\n` : null,
       this.settings && this.settings.length ? `SETTINGS:\n${this.settings.join('\n')}\n` : null,
+      this.extraFields.length ? this.extraFields.map(f => `\n${f[0]}:\n${f[1]}\n`) : null
     ].filter(v => v && v.length).join('\n');
   }
 
